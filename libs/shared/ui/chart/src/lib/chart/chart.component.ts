@@ -1,9 +1,6 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  Input,
-  OnInit
+  Input
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,28 +9,13 @@ import { Observable } from 'rxjs';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent {
   @Input() data$: Observable<any>;
-  chartData: any;
+  @Input() type: string;
+  @Input() title: string;
+  @Input() columnNames: string;
+  @Input() options: string;
 
-  chart: {
-    title: string;
-    type: string;
-    data: any;
-    columnNames: string[];
-    options: any;
-  };
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor() { }
 
-  ngOnInit() {
-    this.chart = {
-      title: '',
-      type: 'LineChart',
-      data: [],
-      columnNames: ['period', 'close'],
-      options: { title: `Stock price`, width: '600', height: '400' }
-    };
-
-    this.data$.subscribe(newData => (this.chartData = newData));
-  }
 }
